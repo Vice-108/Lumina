@@ -10,29 +10,17 @@
             <div class="space-y-4">
                 <div class="space-y-2">
                     <Label for="login-email">Email</Label>
-                    <Input
-                        id="login-email"
-                        placeholder="hi@yourcompany.com"
-                        type="email"
-                        required
-                    />
+                    <Input id="login-email" placeholder="Enter your email" type="email" required />
                 </div>
                 <div class="space-y-2">
                     <Label for="login-password">Password</Label>
-                    <Input
-                        id="login-password"
-                        placeholder="Enter your password"
-                        type="password"
-                        required
-                    />
+                    <Input id="login-password" placeholder="Enter your password" type="password" required />
                 </div>
             </div>
             <div class="flex justify-between gap-2">
                 <div class="flex items-center gap-2">
                     <Checkbox id="login-remember" v-model="rememberMe" />
-                    <Label for="login-remember" class="font-normal text-muted-foreground">
-                        Remember me
-                    </Label>
+                    <Label for="login-remember" class="font-normal text-muted-foreground"> Remember me </Label>
                 </div>
                 <a class="text-sm underline hover:no-underline" href="#">Forgot password?</a>
             </div>

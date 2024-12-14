@@ -7,26 +7,16 @@
         <form class="space-y-5">
             <div class="space-y-4">
                 <div class="space-y-2">
-                    <Label for="signup-name">Full name</Label>
-                    <Input id="signup-name" placeholder="Matt Welsh" type="text" required />
+                    <Label for="signup-name">Name</Label>
+                    <Input id="signup-name" placeholder="Enter your name" type="text" required />
                 </div>
                 <div class="space-y-2">
                     <Label for="signup-email">Email</Label>
-                    <Input
-                        id="signup-email"
-                        placeholder="hi@yourcompany.com"
-                        type="email"
-                        required
-                    />
+                    <Input id="signup-email" placeholder="Enter your email" type="email" required />
                 </div>
                 <div class="space-y-2">
                     <Label for="signup-password">Password</Label>
-                    <Input
-                        id="signup-password"
-                        placeholder="Enter your password"
-                        type="password"
-                        required
-                    />
+                    <Input id="signup-password" placeholder="Enter your password" type="password" required />
                 </div>
             </div>
             <Button type="button" class="w-full">Sign up</Button>
