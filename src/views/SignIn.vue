@@ -1,8 +1,8 @@
 <template>
-    <div class="w-[512px] border-border border-2 rounded-lg p-8 space-y-6">
+    <div class="space-y-6 border-2 p-8 border-border rounded-lg w-[512px]">
         <div class="flex flex-col items-center gap-2">
             <Bot class="w-12 h-12 text-primary" />
-            <h1 class="text-2xl font-bold">Welcome back</h1>
+            <h1 class="font-bold text-2xl">Welcome back</h1>
             <h2>Enter your credentials to login to your account.</h2>
         </div>
 
@@ -38,20 +38,13 @@
             </div>
             <Button type="button" class="w-full">Sign in</Button>
         </form>
-
-        <div
-            class="flex items-center gap-3 before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border"
-        >
-            <span class="text-xs text-muted-foreground">Or</span>
-        </div>
-
-        <Button variant="outline" class="w-full">Login with Google</Button>
     </div>
 </template>
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue';
 import Input from '@/components/ui/input/Input.vue';
 import Label from '@/components/ui/label/Label.vue';
+import Checkbox from '@/components/ui/checkbox/Checkbox.vue';
 import { Bot } from 'lucide-vue-next';
 import { ref } from 'vue';
 

@@ -31,19 +31,6 @@
             </div>
             <Button type="button" class="w-full">Sign up</Button>
         </form>
-
-        <div
-            class="flex before:flex-1 after:flex-1 items-center gap-3 before:bg-border after:bg-border before:h-px after:h-px"
-        >
-            <span class="text-muted-foreground text-xs">Or</span>
-        </div>
-
-        <Button variant="outline" class="w-full">Continue with Google</Button>
-
-        <p class="text-center text-muted-foreground text-xs">
-            By signing up you agree to our
-            <a class="underline hover:no-underline" href="#">Terms</a>.
-        </p>
     </div>
 </template>
 
