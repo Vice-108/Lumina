@@ -4,67 +4,69 @@
 
 @layer base {
     :root {
-        --background: 0 0% 100%;
-        --foreground: 222.2 84% 4.9%;
-
-        --muted: 210 40% 96.1%;
-        --muted-foreground: 215.4 16.3% 46.9%;
-
-        --popover: 0 0% 100%;
-        --popover-foreground: 222.2 84% 4.9%;
-
-        --card: 0 0% 100%;
-        --card-foreground: 222.2 84% 4.9%;
-
-        --border: 214.3 31.8% 91.4%;
-        --input: 214.3 31.8% 91.4%;
-
-        --primary: 222.2 47.4% 11.2%;
-        --primary-foreground: 210 40% 98%;
-
-        --secondary: 210 40% 96.1%;
-        --secondary-foreground: 222.2 47.4% 11.2%;
-
-        --accent: 210 40% 96.1%;
-        --accent-foreground: 222.2 47.4% 11.2%;
-
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 210 40% 98%;
-
-        --ring: 222.2 84% 4.9%;
-
+        --background: 220 23.076923191547394% 94.90196108818054%;
+        --foreground: 234 16.022099554538727% 35.49019694328308%;
+        --muted: 223 15.909090638160706% 82.74509906768799%;
+        --muted-foreground: 233 12.796208262443542% 41.372549533843994%;
+        --popover: 220 23.076923191547394% 94.90196108818054%;
+        --popover-foreground: 234 16.022099554538727% 35.49019694328308%;
+        --card: 220 23.076923191547394% 94.90196108818054%;
+        --card-foreground: 234 16.022099554538727% 35.49019694328308%;
+        --border: 225 13.55932205915451% 76.86274647712708%;
+        --input: 225 13.55932205915451% 76.86274647712708%;
+        --primary: 231 97.20279574394226% 71.96078300476074%;
+        --primary-foreground: 220 23.076923191547394% 94.90196108818054%;
+        --secondary: 223 15.909090638160706% 82.74509906768799%;
+        --secondary-foreground: 234 16.022099554538727% 35.49019694328308%;
+        --accent: 223 15.909090638160706% 82.74509906768799%;
+        --accent-foreground: 234 16.022099554538727% 35.49019694328308%;
+        --destructive: 347 86.66666746139526% 44.11764740943909%;
+        --destructive-foreground: 220 21.95121943950653% 91.96078181266785%;
+        --ring: 234 16.022099554538727% 35.49019694328308%;
         --radius: 0.5rem;
+        --sidebar-background: 0 0% 98%;
+        --sidebar-foreground: 240 5.3% 26.1%;
+        --sidebar-primary: 240 5.9% 10%;
+        --sidebar-primary-foreground: 0 0% 98%;
+        --sidebar-accent: 240 4.8% 95.9%;
+        --sidebar-accent-foreground: 240 5.9% 10%;
+        --sidebar-border: 220 13% 91%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
+        --code-bg: #24273a;
+        --code-token: #e0dfdf;
     }
 
     .dark {
-        --background: 222.2 84% 4.9%;
-        --foreground: 210 40% 98%;
-
-        --muted: 217.2 32.6% 17.5%;
-        --muted-foreground: 215 20.2% 65.1%;
-
-        --popover: 222.2 84% 4.9%;
-        --popover-foreground: 210 40% 98%;
-
-        --card: 222.2 84% 4.9%;
-        --card-foreground: 210 40% 98%;
-
-        --border: 217.2 32.6% 17.5%;
-        --input: 217.2 32.6% 17.5%;
-
-        --primary: 210 40% 98%;
-        --primary-foreground: 222.2 47.4% 11.2%;
-
-        --secondary: 217.2 32.6% 17.5%;
-        --secondary-foreground: 210 40% 98%;
-
-        --accent: 217.2 32.6% 17.5%;
-        --accent-foreground: 210 40% 98%;
-
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 210 40% 98%;
-
-        --ring: 212.7 26.8% 83.9%;
+        --code-bg: #24273a;
+        --code-token: #303043;
+        --background: 240 21.052631735801697% 14.901961386203766%;
+        --foreground: 226 63.93442749977112% 88.03921341896057%;
+        --muted: 237 16.239316761493683% 22.94117659330368%;
+        --muted-foreground: 227 35.29411852359772% 80.0000011920929%;
+        --popover: 240 21.052631735801697% 14.901961386203766%;
+        --popover-foreground: 226 63.93442749977112% 88.03921341896057%;
+        --card: 240 21.052631735801697% 14.901961386203766%;
+        --card-foreground: 226 63.93442749977112% 88.03921341896057%;
+        --border: 234 13.20754736661911% 31.176471710205078%;
+        --input: 234 13.20754736661911% 31.176471710205078%;
+        --primary: 232 97.36841917037964% 85.09804010391235%;
+        --primary-foreground: 240 21.052631735801697% 14.901961386203766%;
+        --secondary: 237 16.239316761493683% 22.94117659330368%;
+        --secondary-foreground: 226 63.93442749977112% 88.03921341896057%;
+        --accent: 237 16.239316761493683% 22.94117659330368%;
+        --accent-foreground: 226 63.93442749977112% 88.03921341896057%;
+        --destructive: 343 81.25% 74.90196228027344%;
+        --destructive-foreground: 240 21.311475336551666% 11.96078434586525%;
+        --ring: 226 63.93442749977112% 88.03921341896057%;
+        --radius: 0.5rem;
+        --sidebar-background: 240 5.9% 10%;
+        --sidebar-foreground: 240 4.8% 95.9%;
+        --sidebar-primary: 224.3 76.3% 48%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 240 3.7% 15.9%;
+        --sidebar-accent-foreground: 240 4.8% 95.9%;
+        --sidebar-border: 240 3.7% 15.9%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
     }
 }
 
@@ -72,7 +74,73 @@
     * {
         @apply border-border;
     }
+
     body {
         @apply bg-background text-foreground;
     }
+}
+
+.markdown-content pre {
+    background-color: var(--code-bg);
+    padding: 0.5rem !important;
+    border-radius: 5px !important;
+    overflow-x: auto !important;
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+    padding-left: 1.5rem !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.markdown-content code {
+    background-color: var(--code-token);
+    padding: 0.2rem 0.4rem !important;
+    border-radius: 4px !important;
+    font-size: 0.85rem !important;
+    font-family: 'Fira Code', monospace !important;
+}
+
+.markdown-content p {
+    margin: 0 !important;
+}
+
+.markdown-content pre code.hljs {
+    background-color: var(--code-bg);
+    padding: 1rem !important;
+    border-radius: 5px !important;
+    display: block !important;
+    font-size: 0.875rem !important;
+    overflow-x: auto !important;
+}
+
+.markdown-content ul {
+    list-style-type: disc !important;
+    padding-left: 1.5rem !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.markdown-content ol {
+    list-style-type: decimal !important;
+    padding-left: 1.5rem !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.markdown-content ul ul,
+.markdown-content ol ol {
+    padding-left: 1.5rem !important;
+}
+
+.prose ul,
+.prose ol {
+    list-style-position: inside !important;
+}
+
+.sidebar {
+    @apply bg-background md:bg-transparent;
 }

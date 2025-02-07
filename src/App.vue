@@ -1,11 +1,11 @@
 <template>
-	<div>
-		<Button>Click me</Button>
-	</div>
+	<Toaster />
+	<app-layout />
 </template>
 
 <script setup>
-import { Button } from '@/components/ui/button'
+import AppLayout from '@/views/AppLayout.vue'
+import { Toaster } from '@/components/ui/sonner'
 </script>
 
 <style scoped></style>
