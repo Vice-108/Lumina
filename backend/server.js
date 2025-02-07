@@ -22,23 +22,51 @@ app.use(cors({
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Function to process the streaming response
-async function processStream(reader, res) {
-	const decoder = new TextDecoder()
-	while (true) {
-		const { done, value } = await reader.read()
-		if (done) break
+// async function processStream(reader, res) {
+// 	const decoder = new TextDecoder()
+// 	while (true) {
+// 		const { done, value } = await reader.read()
+// 		if (done) break
 
-		let result = decoder.decode(value, { stream: true })
-		try {
-			const resultJson = JSON.parse(result)
-			const chunk = resultJson.message.content
-			res.write(chunk)
-		} catch (error) {
-			console.error("Error parsing JSON chunk:", error, result)
-		}
-	}
-	res.end()
-}
+// 		let result = decoder.decode(value, { stream: true })
+// 		try {
+// 			const resultJson = JSON.parse(result)
+// 			const chunk = resultJson.message.content
+// 			res.write(chunk)
+// 		} catch (error) {
+// 			console.error("Error parsing JSON chunk:", error, result)
+// 		}
+// 	}
+// 	res.end()
+// }
+
+// async function processStream(reader, res) {
+//     const decoder = new TextDecoder()
+//     try {
+//         while (true) {
+//             const { done, value } = await reader.read()
+//             if (done) break
+
+//             const chunk = decoder.decode(value)
+//             const lines = chunk.split('\n').filter(line => line.trim())
+
+//             for (const line of lines) {
+//                 try {
+//                     const parsed = JSON.parse(line)
+//                     if (parsed.message?.content) {
+//                         res.write(parsed.message.content)
+//                     }
+//                 } catch (e) {
+//                     console.error('Error parsing chunk:', e)
+//                 }
+//             }
+//         }
+//     } catch (error) {
+//         console.error('Stream processing error:', error)
+//     } finally {
+//         res.end()
+//     }
+// }
 
 // API endpoint to send chat prompt
 app.post('/api/chat', async (req, res) => {
@@ -62,11 +90,36 @@ app.post('/api/chat', async (req, res) => {
 			throw new Error(`HTTP error! Status: ${response.status}`)
 		}
 		const reader = response.body.getReader()
+		const decoder = new TextDecoder()
 		// Set response headers for streaming
 		res.setHeader('Content-Type', 'text/plain')
 		res.setHeader('Transfer-Encoding', 'chunked')
 
-		await processStream(reader, res)
+		try {
+            while (true) {
+                const { done, value } = await reader.read()
+                if (done) break
+
+                const chunk = decoder.decode(value)
+                const lines = chunk.split('\n').filter(line => line.trim())
+
+                for (const line of lines) {
+                    try {
+                        const parsed = JSON.parse(line)
+                        if (parsed.message?.content) {
+                            res.write(parsed.message.content)
+                        }
+                    } catch (e) {
+                        console.error('Error parsing chunk:', e)
+                    }
+                }
+            }
+        } catch (streamError) {
+            console.error('Stream processing error:', streamError)
+            throw streamError
+        } finally {
+            res.end()
+        }
 	} catch (error) {
 		console.error("Error communicating with the API:", error)
 		res.status(500).json({ error: "Internal server error." })

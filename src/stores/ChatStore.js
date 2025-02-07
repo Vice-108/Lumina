@@ -8,6 +8,9 @@ import {
 	getMessages,
 	renameChatroom,
 	deleteChatroom,
+	getModels,
+	generateTitle,
+	sendChatMessage,
 } from '@/service/api'
 
 export const useChatStore = defineStore('chat', () => {
@@ -24,13 +27,12 @@ export const useChatStore = defineStore('chat', () => {
 
 	const fetchModels = async () => {
 		try {
-			const response = await fetch('/api/tags')
-			const data = await response.json()
-			allModels.value = data.models
+			const { models } = await getModels()
+			allModels.value = models
 			selectedModel.value = allModels.value[0]?.name
 		} catch (err) {
 			toast('Error fetching models:', {
-				description: 'Please click through the ngrok warning page first' + err,
+				description:  err,
 				type: 'error',
 				position: 'top-right',
 				closeButton: true,
@@ -38,27 +40,7 @@ export const useChatStore = defineStore('chat', () => {
 		}
 	}
 
-	const createTitleFromPrompt = async (message) => {
-		try {
-			const res = await fetch('/api/title', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ prompt: message, model: selectedModel.value }),
-			}).then((res) => {
-				if (!res.ok) {
-					throw new Error(`HTTP error! Status: ${res.status}`)
-				}
-				return res.json();
-			});
-			return res?.title;
-		} catch (err) {
-			console.error('Error generating title:', err);
-			return message.split(' ').slice(0, 4).join(' ');
-		}
-	}
-
 	const sendMessage = async (content) => {
-		// Handle abort case
 		if (!content && isStreaming.value) {
 			abortController.value?.abort()
 			isStreaming.value = false
@@ -68,49 +50,34 @@ export const useChatStore = defineStore('chat', () => {
 
 		isStreaming.value = true
 		modelResponse.value = ''
+		let accumulatedResponse = ''
 
 		try {
-			// Create chatroom first if needed
 			const message = { content, role: 'user' }
 			chatRoomMessages.value.push(message)
 
 			if (!chatRoomId.value) {
-				const title = await createTitleFromPrompt(content)
+				const { title } = await generateTitle(content, selectedModel.value)
 				const chatroom = await createChatroom(title)
 				chatRooms.value.unshift(chatroom)
 				chatRoomId.value = chatroom.id
 				chatRoomTitle.value = title
 			}
 
-			// Add message to store in DB
 			await storeMessage(chatRoomId.value, 'user', content)
 
-			// Setup new request
 			abortController.value = new AbortController()
-			const response = await fetch('/api/chat', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					messages: chatRoomMessages.value,
-					model: selectedModel.value,
-				}),
-				signal: abortController.value.signal
-			})
 
-			// Handle streaming response
-			const reader = response.body.getReader()
-			const decoder = new TextDecoder()
-			let accumulatedResponse = ''
+			await sendChatMessage(
+				chatRoomMessages.value,
+				selectedModel.value,
+				abortController.value.signal,
+				(chunk) => {
+					accumulatedResponse += chunk
+					modelResponse.value = accumulatedResponse
+				}
+			)
 
-			while (true) {
-				const { done, value } = await reader.read()
-				if (done) break
-				const chunk = decoder.decode(value)
-				accumulatedResponse += chunk
-				modelResponse.value = accumulatedResponse
-			}
-
-			// Save AI response
 			await storeMessage(chatRoomId.value, 'assistant', accumulatedResponse)
 			chatRoomMessages.value.push({
 				content: accumulatedResponse,
